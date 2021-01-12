@@ -8,14 +8,7 @@ const Statistics = ({ good, neutral, bad, setGood, setNeutral, setBad }) => {
     return (
       <>
         <h1>statistics</h1>
-        <p>
-          good {good} <br />
-          neutral {neutral} <br />
-          bad {bad} <br />
-          all {all} <br />
-          average 0 <br />
-          positive 0 %
-        </p>
+        <p>No feedback given</p>
       </>
     );
   } else {
