@@ -6,11 +6,21 @@ const Button = ({ text, set, state }) => {
 };
 
 const Statistic = ({ text, value }) => {
-  return (
-    <span>
-      {text} {value}
-    </span>
-  );
+  if (text === 'positive') {
+    return (
+      <tr>
+        <td>{text}</td>
+        <td>{value} %</td>
+      </tr>
+    );
+  } else {
+    return (
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
+    );
+  }
 };
 
 const Statistics = ({ good, neutral, bad }) => {
@@ -27,14 +37,14 @@ const Statistics = ({ good, neutral, bad }) => {
     return (
       <>
         <h1>statistics</h1>
-        <p>
-          <Statistic text='good' value={good} /> <br />
-          <Statistic text='neutral' value={neutral} /> <br />
-          <Statistic text='bad' value={bad} /> <br />
-          <Statistic text='all' value={all} /> <br />
-          <Statistic text='average' value={(good - bad) / all} /> <br />
-          <Statistic text='positive' value={(good / all) * 100} /> %
-        </p>
+        <table>
+          <Statistic text='good' value={good} />
+          <Statistic text='neutral' value={neutral} />
+          <Statistic text='bad' value={bad} />
+          <Statistic text='all' value={all} />
+          <Statistic text='average' value={(good - bad) / all} />
+          <Statistic text='positive' value={(good / all) * 100} />
+        </table>
       </>
     );
   }
