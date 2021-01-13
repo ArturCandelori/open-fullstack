@@ -28,11 +28,9 @@ const Content = ({ parts }) => {
 };
 
 const Total = ({ parts }) => {
-  const exercises1 = parts[0].exercises;
-  const exercises2 = parts[1].exercises;
-  const exercises3 = parts[2].exercises;
+  const total = parts.reduce((s, p) => s + p.exercises, 0);
 
-  return <h2>total of {exercises1 + exercises2 + exercises3} exercises</h2>;
+  return <h2>total of {total} exercises</h2>;
 };
 
 const App = () => {
