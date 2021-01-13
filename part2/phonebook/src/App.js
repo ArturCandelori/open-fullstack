@@ -6,6 +6,11 @@ const App = () => {
   ]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
+  const [search, setSearch] = useState('');
+
+  const handleSearch = event => {
+    setSearch(event.target.value);
+  };
 
   const addPerson = event => {
     event.preventDefault();
@@ -29,6 +34,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        filter shown with
+        <input value={search} onChange={handleSearch} />
+      </div>
+      <h2>add a new</h2>
       <form onSubmit={addPerson}>
         <div>
           name:{' '}
@@ -49,11 +59,19 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map(person => (
-        <p key={person.name}>
-          {person.name} {person.number}
-        </p>
-      ))}
+      {search === ''
+        ? persons.map(person => (
+            <p key={person.name}>
+              {person.name} {person.number}
+            </p>
+          ))
+        : persons
+            .filter(person => person.name === search)
+            .map(person => (
+              <p key={person.name}>
+                {person.name} {person.number}
+              </p>
+            ))}
     </div>
   );
 };
