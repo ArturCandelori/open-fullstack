@@ -27,12 +27,12 @@ const Content = ({ parts }) => {
   return parts.map(part => <Part key={part.name} part={part} />);
 };
 
-const Total = props => {
-  const exercises1 = props.parts[0].exercises;
-  const exercises2 = props.parts[1].exercises;
-  const exercises3 = props.parts[2].exercises;
+const Total = ({ parts }) => {
+  const exercises1 = parts[0].exercises;
+  const exercises2 = parts[1].exercises;
+  const exercises3 = parts[2].exercises;
 
-  return <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>;
+  return <h2>total of {exercises1 + exercises2 + exercises3} exercises</h2>;
 };
 
 const App = () => {
