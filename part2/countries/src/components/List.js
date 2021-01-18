@@ -4,7 +4,7 @@ const List = ({ result }) => {
   return (
     <ul>
       {result.map(country => (
-        <ListItem country={country} />
+        <ListItem key={country.name} country={country} />
       ))}
     </ul>
   );
