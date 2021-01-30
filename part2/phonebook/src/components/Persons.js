@@ -1,18 +1,20 @@
 import React from 'react';
 
-const Persons = ({ search, persons }) => {
+import Person from './Person';
+
+const Persons = ({ search, persons, deletePerson }) => {
   return search === ''
     ? persons.map(person => (
-        <p key={person.name}>
-          {person.name} {person.number}
-        </p>
+        <Person key={person.name} person={person} deletePerson={deletePerson} />
       ))
     : persons
         .filter(person => person.name === search)
         .map(person => (
-          <p key={person.name}>
-            {person.name} {person.number}
-          </p>
+          <Person
+            key={person.name}
+            person={person}
+            deletePerson={deletePerson}
+          />
         ));
 };
 
