@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
+import './App.css';
+
 import personService from './services/persons';
 
+import Notification from './components/Notification';
 import Filter from './components/Filter';
 import PersonForm from './components/PersonForm';
 import Persons from './components/Persons';
@@ -11,6 +14,7 @@ const App = () => {
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [search, setSearch] = useState('');
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     personService.getAll().then(initialPersons => setPersons(initialPersons));
@@ -42,15 +46,22 @@ const App = () => {
           );
         })
         .catch(error => {
-          alert(`the person ${personToAdd.name} has already been deleted`);
+          setMessage({
+            text: `Information of ${personToAdd.name} has already been removed from server`,
+            type: 'error',
+          });
 
           setPersons(persons.filter(p => p.id !== personToAdd.id));
+
+          setTimeout(() => setMessage(null), 5000);
         });
     } else {
       personToAdd = { name: newName, number: newNumber };
 
       personService.create(personToAdd).then(returnedPerson => {
         setPersons(persons.concat(returnedPerson));
+        setMessage({ text: `Added ${newName}`, type: 'success' });
+        setTimeout(() => setMessage(null), 5000);
         setNewName('');
         setNewNumber('');
       });
@@ -68,6 +79,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
       <Filter search={search} handleSearch={handleSearch} />
       <h2>add a new</h2>
       <PersonForm
